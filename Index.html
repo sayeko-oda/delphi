@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Pesquisa Delphi — Projeto COPE</title>
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:#f5f6f8;font-family:Arial,Helvetica,sans-serif;color:#222}
+  .caixa{max-width:520px;width:100%;padding:32px;border-radius:18px;background:#fff;box-shadow:0 8px 28px rgba(0,0,0,.08);text-align:center}
+  h1{margin:0 0 12px;color:#22238f;font-size:24px}
+  p{margin:0 0 16px;line-height:1.5}
+  a.botao{display:inline-block;padding:13px 24px;border-radius:10px;background:#22238f;color:#fff;font-weight:700;text-decoration:none}
+  .erro{display:none;padding:14px;border-radius:10px;background:#fce8e6;color:#b3261e;font-weight:700}
+</style>
+</head>
+<body>
+<div class="caixa">
+  <h1>Pesquisa Delphi</h1>
+  <p id="msg">Abrindo a pesquisa…</p>
+  <a id="link" class="botao" href="#">Abrir a pesquisa</a>
+  <div id="erro" class="erro">O endereço da pesquisa ainda não foi configurado nesta página.</div>
+</div>
+
+<script>
+  /* COLE AQUI o endereço do questionário (o que termina em /exec), entre as aspas.
+     Quando você publicar uma nova implantação do Apps Script, troque só esta linha. */
+  var DESTINO = 'https://script.google.com/macros/s/AKfycbw-nP9K0aGKjXMFu9DPohZtnRG7nPCsS0ETWp-bfEELlyZSSLICkxYgnz1MQN3odF9f/exec';
+
+  (function () {
+    var ok = /^https:\/\/script\.google\.com\//.test(DESTINO);
+    var link = document.getElementById('link');
+
+    if (!ok) {
+      document.getElementById('msg').style.display = 'none';
+      link.style.display = 'none';
+      document.getElementById('erro').style.display = 'block';
+      return;
+    }
+
+    link.href = DESTINO;
+    setTimeout(function () { window.location.replace(DESTINO); }, 400);
+  })();
+</script>
+<noscript><p style="text-align:center">Ative o JavaScript ou use o botão acima para abrir a pesquisa.</p></noscript>
+</body>
+</html>
